@@ -4,36 +4,43 @@
       <h1>Get the latest tech news!</h1>
     </section>
     <section class="featured-posts">
-      <nuxt-link
-        class="post-preview"
-        :to="'/posts/OTree'"
-      >
-        <article>
-          <div class="post-thumbnail"></div>
-          <div class="post-content">
-            <h1>OTree Post Title</h1>
-            <p>Preview Text</p>
-          </div>
-        </article>
-      </nuxt-link>
-      <nuxt-link
-        class="post-preview"
-        :to="'/posts/Kevin'"
-      >
-        <article>
-          <div class="post-thumbnail"></div>
-          <div class="post-content">
-            <h1>Kevin Post Title</h1>
-            <p>Preview Text</p>
-          </div>
-        </article>
-      </nuxt-link>
+      <PostPreviewVue
+        v-for="post in posts"
+        :id="post.id"
+        :key="post.id"
+        :title="post.title"
+        :thumbnail="post.thumbnail"
+        :preview-text="post.previewText"
+      />
     </section>
   </div>
 </template>
 <script>
+import PostPreviewVue from "~/components/Posts/PostPreview.vue";
+
 export default {
+  components: {
+    PostPreviewVue,
+  },
   layout: 'default',
+  data() {
+    return {
+      posts: [
+        {
+          id: 'OTree',
+          title: 'OTree Post Title',
+          previewText: 'Preview Text',
+          thumbnail: 'https://images.unsplash.com/photo-1607706189992-eae578626c86?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80',
+        },
+        {
+          id: 'Kevin',
+          title: 'Kevin Post Title',
+          previewText: 'Preview Text',
+          thumbnail: 'https://images.unsplash.com/photo-1607706189992-eae578626c86?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80',
+        },
+      ],
+    };
+  },
 };
 </script>
 <style scoped>
@@ -74,42 +81,5 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-}
-
-.post-preview {
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 2px #ccc;
-  background-color: white;
-  width: 90%;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-@media (min-width: 850px) {
-  .post-preview {
-    width: 400px;
-    margin: 10px;
-  }
-}
-
-.post-thumbnail {
-  width: 100%;
-  height: 200px;
-  background-position: center;
-  background-size: cover;
-  background-image: url('https://images.unsplash.com/photo-1607706189992-eae578626c86?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80');
-}
-
-.post-content {
-  padding: 10px;
-  text-align: center;
-}
-
-a:hover .post-content,
-a:active .post-content {
-  background-color: #ccc;
 }
 </style>
