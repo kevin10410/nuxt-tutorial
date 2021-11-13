@@ -1,9 +1,10 @@
 <template>
   <section class="featured-posts">
-    <PostPreviewVue
+    <PostPreview
       v-for="post in posts"
       :id="post.id"
       :key="post.id"
+      :is-admin="isAdmin"
       :title="post.title"
       :thumbnail="post.thumbnail"
       :preview-text="post.previewText"
@@ -11,12 +12,18 @@
   </section>
 </template>
 <script>
-import PostPreviewVue from "~/components/Posts/PostPreview.vue";
+import PostPreview from "~/components/Posts/PostPreview.vue";
 
 export default {
   name: 'PostList',
   components: {
-    PostPreviewVue,
+    PostPreview,
+  },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
