@@ -23,6 +23,7 @@ export default {
   components: {
     PostList,
   },
+  layout: 'admin',
 };
 </script>
 <style scoped>
